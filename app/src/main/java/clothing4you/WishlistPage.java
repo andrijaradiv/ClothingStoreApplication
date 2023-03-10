@@ -29,6 +29,7 @@ public class WishlistPage extends JDialog {
 
         this.previousCatalog = previousCatalog;
         this.items = items;
+        cart = new Cart();
         wishList = new WishList();
 
         //-----------------------------------
