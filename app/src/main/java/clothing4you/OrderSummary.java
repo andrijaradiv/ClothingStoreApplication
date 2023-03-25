@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderSummary extends JDialog{
@@ -72,8 +73,14 @@ public class OrderSummary extends JDialog{
         setVisible(true);
     }
 
+    //getter
+
+    public Cart getCart() {
+        return cart;
+    }
+    
     // Overloaded constructor
-    public OrderSummary(JFrame parent, ArrayList<Item> items) {
+    public OrderSummary(JFrame parent, ArrayList<Item> items) throws SQLException, ClassNotFoundException {
         // implementation
         this(parent, items, new Catalog(parent));
     }

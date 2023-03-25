@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static clothing4you.JDBC.exists;
+import static clothing4you.JDBC.query;
 
 public class Return extends JDialog{
     private JPanel returnPanel;
@@ -18,7 +22,7 @@ public class Return extends JDialog{
 
     public Return(JFrame parent, ArrayList<Item> items){
         super(parent);
-        setTitle("Login");
+        setTitle("Return");
         setContentPane(returnPanel);
         setMinimumSize(new Dimension(600, 600));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -33,7 +37,13 @@ public class Return extends JDialog{
         submitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                successfulReturn();
+                try {
+                    successfulReturn();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -41,28 +51,39 @@ public class Return extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Catalog myCatalog = new Catalog(null);
+                try {
+                    Catalog myCatalog = new Catalog(null);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
         setVisible(true);
     }
 
-    public void successfulReturn(){
+    public void successfulReturn() throws SQLException, ClassNotFoundException {
         String itemName = nameTF.getText();
         int quantity = (int) quantitySpinner.getValue();
-        boolean itemExist = true;
+        boolean itemExist = exists(itemName, "catalog", "name");
+        double price = 0;
+        ArrayList result = query("catalog", "");
 
-        for (Item item : items) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
-                itemExist = true;
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).toString().contains(itemName)) {
+                String[] splited = result.get(i).toString().split(" ");
+                price = Double.parseDouble(splited[4]);
                 // perform the return submission for this item
                 break;
             }
         }
 
+        price = price * 0.5;
+
         if (itemExist) {
-            JOptionPane.showMessageDialog(null, "Your return submission was submitted successfully.");
+            JOptionPane.showMessageDialog(null, "Thank you for your return. Here is your partial refund off 50%: $"+price);
 
             // preform the return submission
         } else {

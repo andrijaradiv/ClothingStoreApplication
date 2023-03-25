@@ -6,7 +6,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static clothing4you.JDBC.query;
 
 
 public class Catalog extends JDialog {
@@ -25,7 +28,7 @@ public class Catalog extends JDialog {
     ImageIcon beanie = new ImageIcon("img/Beanie.png");
     ImageIcon hat = new ImageIcon("img/Hat.png");
 
-    public Catalog(JFrame parent) {
+    public Catalog(JFrame parent) throws SQLException, ClassNotFoundException {
         super(parent);
         setTitle("Catalog");
         catalogPanel = new JPanel(new BorderLayout());
@@ -40,12 +43,18 @@ public class Catalog extends JDialog {
         wl = new WishList();
         items = new ArrayList<>();
 
-        items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
-        items.add(new Item("Hoodie", "Tops", "M",1,25.00, hoodie));
-        items.add(new Item("Jeans", "Bottoms", "M",1, 20.00, jeans));
-        items.add(new Item("Shorts", "Bottoms", "M",1,15.00, shorts));
-        items.add(new Item("Beanie", "Hats", "M",1,7.50, beanie));
-        items.add(new Item("Hat", "Hats", "M",1,7.50, hat));
+        ArrayList result = query("catalog", "");
+        for (int i = 0; i < result.size(); i++) {
+            String[] splited = result.get(i).toString().split(" ");
+            items.add(new Item(splited[0], splited[1], splited[2], Integer.parseInt(splited[3]), Double.parseDouble(splited[4]), null));
+        }
+
+//        items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
+//        items.add(new Item("Hoodie", "Tops", "M",1,25.00, hoodie));
+//        items.add(new Item("Jeans", "Bottoms", "M",1, 20.00, jeans));
+//        items.add(new Item("Shorts", "Bottoms", "M",1,15.00, shorts));
+//        items.add(new Item("Beanie", "Hats", "M",1,7.50, beanie));
+//        items.add(new Item("Hat", "Hats", "M",1,7.50, hat));
 
 
 
@@ -115,7 +124,11 @@ public class Catalog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                OrderSummary mySummary = new OrderSummary(null, cart.getItems(), Catalog.this);
+                try {
+                    OrderSummary mySummary = new OrderSummary(null, cart.getItems(), Catalog.this);
+                } catch (Exception er) {
+                    throw er;
+                }
             }
         });
         button.add(checkout);

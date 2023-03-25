@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import com.formdev.flatlaf.FlatDarculaLaf;
 
 public class Checkout extends JDialog {
@@ -27,8 +29,9 @@ public class Checkout extends JDialog {
     ImageIcon icon2 = new ImageIcon("img/amex.png");
     ImageIcon icon3 = new ImageIcon("img/paypal.png");
 
-    Cart cart = new Cart();
-    double cartTotal = cart.getTotal();
+
+
+
 
     public Checkout(JFrame parent, OrderSummary previousSummary) {
         super(parent);
@@ -46,7 +49,9 @@ public class Checkout extends JDialog {
         iconLabel3.setText("");
         iconLabel3.setIcon(icon3);
 
-        totalLabel.setText("Total:" + " " + String.format("%.2f",cartTotal));
+        Cart cart = previousSummary.getCart();
+        double cartTotal = cart.getTotal();
+        totalLabel.setText("Total: " + " " + String.format("%.2f",cartTotal));
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -62,7 +67,13 @@ public class Checkout extends JDialog {
                 //add card info to the database - insert into user profile
                 //verify the details
                 //printout a msg
-                authorizePayment();
+                try {
+                    authorizePayment();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -78,7 +89,7 @@ public class Checkout extends JDialog {
         setVisible(true);
     }
 
-    private void authorizePayment() {
+    private void authorizePayment() throws SQLException, ClassNotFoundException {
         String cardName = tfCardName.getText();
         String cardNum = String.valueOf(tfCardNum.getText());
         String billAddress = tfAddress.getText();

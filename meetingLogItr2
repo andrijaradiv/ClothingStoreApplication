@@ -1,0 +1,20 @@
+Client Team Meeting (during designated lab time):
+
+
+
+We were given the feedback of having a wishlist feature such that users can get notified when the price of one of their wishlisted items changes. We debated on different implementation of this, primarily between whether we attempt to send an actual email to the account or have an in app notification.
+
+
+
+After meeting with the client team, we decided to begin allocating work, primarily Gabriel K being allocated to a majority of the UI focused work as that was what he did in the previous iteration, Neha picking up many loose ends form iteration 1 and Andre taking small backend tasks, Gabriel R being allocated the user registration and login system and Bhargav being given the product notification feature from the client team.
+
+
+
+March 8th:
+
+Gabriel K has finished his end, Neha is approaching her completed tasks. Andre has begun putting things together for his tasks and Gabriel R is trouble shooting urgent issues. Currently there is an issue with branch merges however that is being worked on actively post-meeting.
+
+
+March 9-10:
+
+Due to many task shuffling around the wishlist while fixed, isn't going to make it to itr2 as there isn't enough time to resolve merge conflicts and fix bugs. On top of this, proper test cases could not be written due to the same time constraint. Apart from these two notes, all other big stories were completed and previous issues were resolved. 

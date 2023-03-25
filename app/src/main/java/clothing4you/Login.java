@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
 public class Login extends JDialog {
@@ -36,8 +37,15 @@ public class Login extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 String username = tfUsername.getText();
                 char[] password = pfPassword.getPassword();
-                dispose();
-                Catalog myCatalog = new Catalog(null);
+                // dispose();
+                try {
+                    UserManager.login(username, password.toString());
+                    Catalog myCatalog = new Catalog(null);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         btnRegister.addActionListener(new ActionListener() {
@@ -51,12 +59,16 @@ public class Login extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Catalog myCatalog = new Catalog(null);
+                try {
+                    Catalog myCatalog = new Catalog(null);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
         setVisible(true);
     }
-
-
 }
