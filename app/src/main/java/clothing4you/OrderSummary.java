@@ -70,8 +70,6 @@ public class OrderSummary extends JDialog{
         button.add(checkout);
         orderSummaryPanel.add(button, BorderLayout.SOUTH);
 
-
-
         setVisible(true);
     }
 
