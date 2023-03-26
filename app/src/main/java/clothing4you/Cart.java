@@ -3,8 +3,8 @@ package clothing4you;
 import java.util.ArrayList;
 
 public class Cart {
-    private ArrayList<Item> items;
-    private double tax;
+    private final ArrayList<Item> items;
+    private final double tax;
     private double totalPrice;
 
     public Cart(){
@@ -23,14 +23,13 @@ public class Cart {
     }
 
     public double getTax() {
-        return tax;
+        totalPrice = getSubTotal();
+        return totalPrice * tax;
     }
 
     public double getTotal() {
         totalPrice = 0.0;
-        for(Item item: items){
-            totalPrice += item.getPrice() * item.getQuantity();
-        }
+        totalPrice = getSubTotal();
         return totalPrice + (totalPrice * tax);
     }
 
