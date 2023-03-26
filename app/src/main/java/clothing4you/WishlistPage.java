@@ -33,21 +33,6 @@ public class WishlistPage extends JDialog {
         cart = new Cart();
         wishList = new WishList();
 
-        //-----------------------------------
-//        cmCategory = new JComboBox<String>();
-//        cmCategory.addItem("All");
-//        cmCategory.addItem("Tops");
-//        cmCategory.addItem("Bottoms");
-//        cmCategory.addItem("Footwear");
-//        cmCategory.addItem("Hats");
-//        cmCategory.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                updateTable();
-//            }
-//        });
-        //-----------------------------------------
-
         model = new DefaultTableModel(new Object[]{"Name", "Price", "Category"}, 0);
         table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -90,7 +75,13 @@ public class WishlistPage extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                OrderSummary mySummary = new OrderSummary(null, cart.getItems()); //need to add parameter "WishlistPage.this"!!
+                try {
+                    OrderSummary mySummary = new OrderSummary(null, cart.getItems()); //need to add parameter "WishlistPage.this"!!
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         button.add(checkout);
@@ -103,19 +94,9 @@ public class WishlistPage extends JDialog {
     }
 
     // Overloaded constructor
-    public WishlistPage(JFrame parent, ArrayList<Item> items) {
+    public WishlistPage(JFrame parent, ArrayList<Item> items) throws SQLException, ClassNotFoundException {
         // implementation
         this(parent, items, new Catalog(parent));
     }
 
-//    private void updateTable() {
-//        model.setRowCount(0);
-//        String selectedCategory = (String) cmCategory.getSelectedItem();
-//        for (Item item : items) {
-//            if (selectedCategory.equals("All") || selectedCategory.equals(item.getCategory())) {
-//                model.addRow(new Object[] { item.getName(), item.getSize(), "$" + String.format("%.2f",item.getPrice()), item.getImage() });
-//            }
-//        }
-//
-//    }
 }
