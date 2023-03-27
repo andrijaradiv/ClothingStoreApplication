@@ -17,6 +17,7 @@ public class Login extends JDialog {
     private JPasswordField pfPassword;
     private JButton btnGuest;
     private JLabel iconLabel;
+    private JButton btnJob;
 
     ImageIcon icon = new ImageIcon("img/Icon.png");
 
@@ -68,7 +69,15 @@ public class Login extends JDialog {
                 }
             }
         });
+        btnJob.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Job myJob = new Job(null);
+            }
+        });
 
+        pack();
         setVisible(true);
     }
 }
