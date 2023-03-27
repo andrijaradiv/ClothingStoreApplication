@@ -155,6 +155,17 @@ public class Catalog extends JDialog {
         });
         button.add(returnBtn);
 
+        //Order History
+        JButton historyBtn = new JButton("Order History");
+        historyBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // should open the Order history page
+            }
+        });
+        button.add(historyBtn);
+
         catalogPanel.add(button, BorderLayout.SOUTH);
 
         JPanel buttonOne = new JPanel();
