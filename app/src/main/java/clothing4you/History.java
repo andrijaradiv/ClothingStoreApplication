@@ -1,6 +1,7 @@
 package clothing4you;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,28 +27,6 @@ public class History extends JDialog {
         titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
         titlePanel.add(titleLabel);
 
-        JPanel contentPanel = new JPanel(new GridLayout(0, 3, 10, 10));
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        JLabel dateLabel = new JLabel("Date");
-        JLabel orderNumberLabel = new JLabel("Order Number");
-        JLabel amountLabel = new JLabel("Amount");
-
-        contentPanel.add(dateLabel);
-        contentPanel.add(orderNumberLabel);
-        contentPanel.add(amountLabel);
-
-        // Assume that we have an ArrayList<Order> called orderList
-        for (Order order : orderList) {
-            JLabel dateValueLabel = new JLabel(order.getDate());
-            JLabel orderNumberValueLabel = new JLabel(order.getOrderNumber());
-            JLabel amountValueLabel = new JLabel(order.getAmount());
-
-            contentPanel.add(dateValueLabel);
-            contentPanel.add(orderNumberValueLabel);
-            contentPanel.add(amountValueLabel);
-        }
-
         JPanel buttonPanel = new JPanel();
 
         JButton backBtn = new JButton("Back");
@@ -70,19 +49,27 @@ public class History extends JDialog {
         });
         buttonPanel.add(returnBtn);
 
+        // Set up the table model
+        String[] columnNames = {"Date", "Order Number", "Amount"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (Order order : orderList) {
+            String[] rowData = {order.getDate(), order.getOrderNumber(), order.getAmount()};
+            model.addRow(rowData);
+        }
 
-        historyPanel.add(buttonPanel, BorderLayout.SOUTH);
+        // Create the table and add it to a scroll pane
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        table.setDefaultEditor(Object.class, null);
 
-
-        JScrollPane scrollPane = new JScrollPane(contentPanel);
-
+        // Add the components to the main panel
         mainPanel.add(titlePanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
+        historyPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
         setVisible(true);
     }
-
 
     //Just to test the code with order array list
     public static void main(String[] args) {
@@ -92,7 +79,6 @@ public class History extends JDialog {
         orderList.add(new Order("2022-01-03", "1003", "$17.75"));
         orderList.add(new Order("2022-01-04", "1004", "$50.00"));
         orderList.add(new Order("2022-01-05", "1005", "$21.25"));
-
 
         History myHistory = new History(null, orderList);
     }
