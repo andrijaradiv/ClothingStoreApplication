@@ -73,6 +73,10 @@ public class OrderSummary extends JDialog{
         setVisible(true);
     }
 
+//    public OrderSummary(WishlistPage wishlistPage, ArrayList<Item> items) {
+//        //
+//    }
+
     //getter
 
     public Cart getCart() {

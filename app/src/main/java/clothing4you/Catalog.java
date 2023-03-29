@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static clothing4you.JDBC.query;
 
@@ -19,7 +20,7 @@ public class Catalog extends JDialog {
     private DefaultTableModel model;
     private ArrayList<Item> items;
     private Cart cart;
-    private WishList wl;
+    private WishlistModel wl;
 
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
     ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
@@ -40,7 +41,7 @@ public class Catalog extends JDialog {
 
 
         cart = new Cart();
-        wl = new WishList();
+        wl = new WishlistModel();
         items = new ArrayList<>();
 
         ArrayList result = query("catalog", "");
@@ -139,7 +140,16 @@ public class Catalog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                WishlistPage myWishList = new WishlistPage(null, wl.getItems(), Catalog.this);
+                //WishlistPage myWishList = new WishlistPage(null, wl.getItems(), Catalog.this);
+                WishlistView view = new WishlistView(null, wl.getWishlistItems(),Catalog.this);
+//                items = wl.getWishlistItems();
+//                for (int i = 0; i < items.size(); i++) {
+//                    System.out.println(items.get(i));
+//                }
+
+                //, new WishlistController(wl, wishlistView));
+                WishlistController controller = new WishlistController(wl, view);//, Catalog.this);
+               // view.createBackButton().addActionListener(controller::onBackButtonClick);
             }
         });
         button.add(wishlist);
@@ -186,7 +196,7 @@ public class Catalog extends JDialog {
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     Item item = items.get(row);
-                    wl.addItem(item);
+                    wl.addItemToWishlist(item);
                     JOptionPane.showMessageDialog(catalogPanel, item.getName() + " added to wishlist.");
                 } else {
                     JOptionPane.showMessageDialog(catalogPanel, "Please select an item that is available.");
