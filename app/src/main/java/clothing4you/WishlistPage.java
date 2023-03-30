@@ -11,8 +11,6 @@ public class WishlistPage extends JDialog {
     private final ArrayList<Item> items;
     private final JTable table;
     private final DefaultTableModel model;
-    private final WishList wishList; //
-    //private final Cart cart;
     private final Catalog previousCatalog;
 
 
@@ -28,8 +26,6 @@ public class WishlistPage extends JDialog {
 
         this.previousCatalog = previousCatalog;
         this.items = items;
-        //cart = new Cart();
-        wishList = new WishList();//
 
         model = new DefaultTableModel(new Object[]{"Name", "Price", "Category"}, 0);
         table = new JTable(model);
@@ -91,6 +87,9 @@ public class WishlistPage extends JDialog {
                 Item item = items.get(row);
                 Cart.addItem(item);
                 JOptionPane.showMessageDialog(wishlistPanel, item.getName() + " added to cart.");
+                WishList.removeItem(item);
+                model.removeRow(row);
+                table.setModel(model);
             } else {
                 JOptionPane.showMessageDialog(wishlistPanel, "Please select an item that is available.");
             }
