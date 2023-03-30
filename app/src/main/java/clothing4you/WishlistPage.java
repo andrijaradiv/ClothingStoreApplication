@@ -63,6 +63,10 @@ public class WishlistPage extends JDialog {
         JButton addToCartButton = createAddToCartButton();
         buttonPanel.add(addToCartButton);
 
+        // Create and add remove button
+        JButton removeButton = createRemoveButton();
+        buttonPanel.add(removeButton);
+
         // Create and add checkout button
         JButton checkoutButton = createCheckoutButton();
         buttonPanel.add(checkoutButton);
@@ -95,6 +99,23 @@ public class WishlistPage extends JDialog {
             }
         });
         return addToCartButton;
+    }
+
+    private JButton createRemoveButton() {
+        JButton removeButton = new JButton("Remove");
+        removeButton.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row != -1) {
+                Item item = items.get(row);
+                WishList.removeItem(item);
+                JOptionPane.showMessageDialog(wishlistPanel, item.getName() + " removed from the wish list.");
+                model.removeRow(row);
+                table.setModel(model);
+            } else {
+                JOptionPane.showMessageDialog(wishlistPanel, "Please select an item that is available.");
+            }
+        });
+        return removeButton;
     }
 
     private JButton createCheckoutButton() {

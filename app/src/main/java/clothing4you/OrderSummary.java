@@ -27,8 +27,6 @@ public class OrderSummary extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         this.previousCatalog = previousCatalog;
-      //  this.items = items;
-        //cart = new Cart();
 
         String[] column = {"Name", "Price"};
         model = new DefaultTableModel(column, 0);
