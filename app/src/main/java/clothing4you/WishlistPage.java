@@ -12,7 +12,7 @@ public class WishlistPage extends JDialog {
     private final JTable table;
     private final DefaultTableModel model;
     private final WishList wishList; //
-    private final Cart cart;
+    //private final Cart cart;
     private final Catalog previousCatalog;
 
 
@@ -28,7 +28,7 @@ public class WishlistPage extends JDialog {
 
         this.previousCatalog = previousCatalog;
         this.items = items;
-        cart = new Cart();
+        //cart = new Cart();
         wishList = new WishList();//
 
         model = new DefaultTableModel(new Object[]{"Name", "Price", "Category"}, 0);
@@ -89,7 +89,7 @@ public class WishlistPage extends JDialog {
             int row = table.getSelectedRow();
             if (row != -1) {
                 Item item = items.get(row);
-                cart.addItem(item);
+                Cart.addItem(item);
                 JOptionPane.showMessageDialog(wishlistPanel, item.getName() + " added to cart.");
             } else {
                 JOptionPane.showMessageDialog(wishlistPanel, "Please select an item that is available.");
@@ -102,11 +102,7 @@ public class WishlistPage extends JDialog {
         JButton checkoutButton = new JButton("Checkout");
         checkoutButton.addActionListener(e -> {
             dispose();
-            try {
-                OrderSummary mySummary = new OrderSummary(null, cart.getItems());
-            } catch (SQLException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
+            OrderSummary mySummary = new OrderSummary(null, previousCatalog);
         });
         return checkoutButton;
     }

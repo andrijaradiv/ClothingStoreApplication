@@ -13,10 +13,11 @@ public class OrderSummary extends JDialog{
     private ArrayList<Item> items;
     private JTable table;
     private DefaultTableModel model;
-    private Cart cart;
+    //private Cart cart;
     private Catalog previousCatalog;
+    private WishlistPage previousWishlistPage;
 
-    public OrderSummary(JFrame parent, ArrayList<Item> items, Catalog previousCatalog){
+    public OrderSummary(JFrame parent,/* ArrayList<Item> items,*/ Catalog previousCatalog){
         super(parent);
         setTitle("Order Summary");
         orderSummaryPanel = new JPanel(new BorderLayout());
@@ -26,23 +27,23 @@ public class OrderSummary extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         this.previousCatalog = previousCatalog;
-        this.items = items;
-        cart = new Cart();
+      //  this.items = items;
+        //cart = new Cart();
 
         String[] column = {"Name", "Price"};
         model = new DefaultTableModel(column, 0);
 
         table = new JTable(model);
         int totalQuantity = 0;
-        for (Item item: items){
-            cart.addItem(item);
-            model.addRow(new Object[]{item.getName(), "$" + String.format("%.2f",item.getPrice())});
-        }
+        Cart.getItems().forEach(item -> {
+            //Cart.addItem(item);
+            model.addRow(new Object[]{item.getName(), "$" + String.format("%.2f", item.getPrice())});
+        });
         model.addRow(new Object[]{"______________________"});
-        model.addRow(new Object[]{"Subtotal:", "$" + String.format("%.2f",cart.getSubTotal())});
-        model.addRow(new Object[]{"Tax:", "$" + String.format("%.2f",cart.getTax())});
+        model.addRow(new Object[]{"Subtotal:", "$" + String.format("%.2f",Cart.getSubTotal())});
+        model.addRow(new Object[]{"Tax:", "$" + String.format("%.2f",Cart.getTax())});
         model.addRow(new Object[]{"______________________"});
-        model.addRow(new Object[]{"Total:", "$" + String.format("%.2f",cart.getTotal())});
+        model.addRow(new Object[]{"Total:", "$" + String.format("%.2f",Cart.getTotal())});
 
         orderSummaryPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         table.setDefaultEditor(Object.class, null);
@@ -73,20 +74,10 @@ public class OrderSummary extends JDialog{
         setVisible(true);
     }
 
-//    public OrderSummary(WishlistPage wishlistPage, ArrayList<Item> items) {
-//        //
-//    }
-
-    //getter
-
-    public Cart getCart() {
-        return cart;
-    }
-    
     // Overloaded constructor
-    public OrderSummary(JFrame parent, ArrayList<Item> items) throws SQLException, ClassNotFoundException {
+    public OrderSummary(JFrame parent, WishlistPage previousWishlistPage) throws SQLException, ClassNotFoundException {
         // implementation
-        this(parent, items, new Catalog(parent));
+        this(parent, /*items,*/ new Catalog(parent));
     }
 }
 

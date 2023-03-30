@@ -18,7 +18,7 @@ public class Return extends JDialog{
     private JButton submitBtn;
     private JButton cancelBtn;
     private ArrayList<Item> items;
-    private Cart cart;
+ //   private Cart cart;
 
     public Return(JFrame parent, ArrayList<Item> items){
         super(parent);
@@ -30,7 +30,7 @@ public class Return extends JDialog{
         setLocationRelativeTo(parent);
 
         this.items = items;
-        cart = new Cart();
+     //   cart = new Cart();
 
         quantitySpinner.setModel(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
 
