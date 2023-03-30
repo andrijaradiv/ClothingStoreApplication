@@ -19,7 +19,7 @@ public class Catalog extends JDialog {
     private JTable table;
     private DefaultTableModel model;
     private ArrayList<Item> items;
-    private Cart cart;
+    //private Cart cart;
     private WishList wl;
 
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
@@ -40,7 +40,7 @@ public class Catalog extends JDialog {
         setLocationRelativeTo(parent);
 
 
-        cart = new Cart();
+        //cart = new Cart();
         wl = new WishList();
         items = new ArrayList<>();
 
@@ -126,7 +126,7 @@ public class Catalog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 try {
-                    OrderSummary mySummary = new OrderSummary(null, cart.getItems(), Catalog.this);
+                    OrderSummary mySummary = new OrderSummary(null, /*Cart.getItems(), */Catalog.this);
                 } catch (Exception er) {
                     throw er;
                 }
@@ -151,7 +151,7 @@ public class Catalog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Return myReturn = new Return(null,cart.getItems());
+                Return myReturn = new Return(null,Cart.getItems());
             }
         });
         button.add(returnBtn);
@@ -169,7 +169,7 @@ public class Catalog extends JDialog {
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     Item item = items.get(row);
-                    cart.addItem(item);
+                    Cart.addItem(item);
                     JOptionPane.showMessageDialog(catalogPanel, item.getName() + " added to cart.");
                 } else {
                     JOptionPane.showMessageDialog(catalogPanel, "Please select an item that is available.");

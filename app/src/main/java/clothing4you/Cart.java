@@ -3,37 +3,35 @@ package clothing4you;
 import java.util.ArrayList;
 
 public class Cart {
-    private final ArrayList<Item> items;
-    private final double tax;
-    private double totalPrice;
+    private static final ArrayList<Item> items = new ArrayList<>();
+    private static final double tax = 0.13;
+    private static double totalPrice;
 
-    public Cart(){
-        items = new ArrayList<>();
-        tax = 0.13;
-        totalPrice = 0.0;
+    private Cart(){
+
     }
 
-    public void addItem(Item item) {
+    public static void addItem(Item item) {
         items.add(item);
         totalPrice += item.getPrice();
     }
 
-    public ArrayList<Item> getItems() {
+    public static ArrayList<Item> getItems() {
         return items;
     }
 
-    public double getTax() {
+    public static double getTax() {
         totalPrice = getSubTotal();
         return totalPrice * tax;
     }
 
-    public double getTotal() {
+    public static double getTotal() {
         totalPrice = 0.0;
         totalPrice = getSubTotal();
         return totalPrice + (totalPrice * tax);
     }
 
-    public double getSubTotal() {
+    public static double getSubTotal() {
         totalPrice = 0.0;
         for(Item item: items){
             totalPrice += item.getPrice() * item.getQuantity();
@@ -41,7 +39,7 @@ public class Cart {
         return totalPrice;
     }
 
-    public int getQuantity(){
+    public static int getQuantity(){
         int quantity = 0;
         for (Item item: items){
             quantity += item.getQuantity();

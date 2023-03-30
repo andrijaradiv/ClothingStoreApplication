@@ -49,8 +49,8 @@ public class Checkout extends JDialog {
         iconLabel3.setText("");
         iconLabel3.setIcon(icon3);
 
-        Cart cart = previousSummary.getCart();
-        double cartTotal = cart.getTotal();
+        //Cart cart = previousSummary.getCart();
+        double cartTotal = Cart.getTotal();
         totalLabel.setText("Total: " + " " + String.format("%.2f",cartTotal));
 
         cancelButton.addActionListener(new ActionListener() {
