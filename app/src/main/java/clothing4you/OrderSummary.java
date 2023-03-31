@@ -33,15 +33,7 @@ public class OrderSummary extends JDialog{
 
         table = new JTable(model);
         int totalQuantity = 0;
-        Cart.getItems().forEach(item -> {
-            //Cart.addItem(item);
-            model.addRow(new Object[]{item.getName(), "$" + String.format("%.2f", item.getPrice())});
-        });
-        model.addRow(new Object[]{"______________________"});
-        model.addRow(new Object[]{"Subtotal:", "$" + String.format("%.2f",Cart.getSubTotal())});
-        model.addRow(new Object[]{"Tax:", "$" + String.format("%.2f",Cart.getTax())});
-        model.addRow(new Object[]{"______________________"});
-        model.addRow(new Object[]{"Total:", "$" + String.format("%.2f",Cart.getTotal())});
+        createTotalRows();
 
         orderSummaryPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         table.setDefaultEditor(Object.class, null);
@@ -67,6 +59,25 @@ public class OrderSummary extends JDialog{
             }
         });
         button.add(checkout);
+
+        JButton remove = new JButton("Remove Item");
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                if (row != -1) {
+                    Item item = Cart.getItems().get(row);
+                    Cart.removeItem(item);
+                    JOptionPane.showMessageDialog(orderSummaryPanel, item.getName() + " removed from the Cart.");
+                    model.removeRow(row);
+                    model.setRowCount(0);
+                    createTotalRows();
+                } else {
+                    JOptionPane.showMessageDialog(orderSummaryPanel, "Please select an item that is available.");
+                }
+            }
+        });
+        button.add(remove);
         orderSummaryPanel.add(button, BorderLayout.SOUTH);
 
         setVisible(true);
@@ -77,6 +88,18 @@ public class OrderSummary extends JDialog{
         // implementation
         this(parent, /*items,*/ new Catalog(parent));
     }
+
+    private void createTotalRows(){
+        Cart.getItems().forEach(item -> {
+            model.addRow(new Object[]{item.getName(), "$" + String.format("%.2f", item.getPrice())});
+        });
+        model.addRow(new Object[]{"______________________"});
+        model.addRow(new Object[]{"Subtotal:", "$" + String.format("%.2f", Cart.getSubTotal())});
+        model.addRow(new Object[]{"Tax:", "$" + String.format("%.2f", Cart.getTax())});
+        model.addRow(new Object[]{"______________________"});
+        model.addRow(new Object[]{"Total:", "$" + String.format("%.2f", Cart.getTotal())});
+    }
+
 }
 
 
