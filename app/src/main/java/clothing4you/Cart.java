@@ -16,10 +16,12 @@ public class Cart {
         totalPrice += item.getPrice();
     }
 
+
     public static void removeItem(Item item) {
         items.remove(item);
         totalPrice -= item.getPrice() * item.getQuantity();
     }
+
 
     public static ArrayList<Item> getItems() {
         return items;

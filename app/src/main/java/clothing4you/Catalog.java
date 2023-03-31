@@ -20,6 +20,7 @@ public class Catalog extends JDialog {
     private DefaultTableModel model;
     private ArrayList<Item> items;
 
+
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
     ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
     ImageIcon jeans = new ImageIcon("img/Jeans.png");

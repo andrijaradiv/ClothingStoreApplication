@@ -3,6 +3,7 @@ package clothing4you;
 import java.util.ArrayList;
 
 public class WishList {
+
     private static final ArrayList<Item> wishlistItems = new ArrayList<>();
 
     private WishList() {

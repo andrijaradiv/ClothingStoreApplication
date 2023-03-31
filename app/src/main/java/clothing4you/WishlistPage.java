@@ -11,6 +11,7 @@ public class WishlistPage extends JDialog {
     private final ArrayList<Item> items;
     private final JTable table;
     private final DefaultTableModel model;
+
     private final Catalog previousCatalog;
 
 
@@ -39,6 +40,7 @@ public class WishlistPage extends JDialog {
         wishlistPanel.add(button, BorderLayout.SOUTH);
 
         setVisible(true);
+
     }
 
     // Overloaded constructor

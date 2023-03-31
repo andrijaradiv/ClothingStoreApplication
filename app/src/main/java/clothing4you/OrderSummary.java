@@ -33,7 +33,9 @@ public class OrderSummary extends JDialog{
 
         table = new JTable(model);
         int totalQuantity = 0;
+
         createTotalRows();
+
 
         orderSummaryPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         table.setDefaultEditor(Object.class, null);
