@@ -3,27 +3,26 @@ package clothing4you;
 import java.util.ArrayList;
 
 public class WishList {
-    private final ArrayList<Item> wishlistItems;
 
-    public WishList() {
-        wishlistItems = new ArrayList<>();
+    private static final ArrayList<Item> wishlistItems = new ArrayList<>();
+
+    private WishList() {
+
     }
 
-    public void addItem(Item item) {
+    public static void addItem(Item item) {
         wishlistItems.add(item);
     }
 
-    public void removeItem(int index){
-        wishlistItems.remove(index);
+    public static void removeItem(Item item){
+        wishlistItems.remove(item);
     }
 
-    public ArrayList<Item> getItems() {
+    public static ArrayList<Item> getItems() {
         return wishlistItems;
     }
 
-
-
-    public void addToCart(int index) {
+    public static void addToCart(int index) {
         Item item = wishlistItems.get(index);
         Cart.addItem(item);
         wishlistItems.remove(index);

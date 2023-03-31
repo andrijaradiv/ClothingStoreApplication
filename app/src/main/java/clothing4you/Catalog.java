@@ -19,8 +19,7 @@ public class Catalog extends JDialog {
     private JTable table;
     private DefaultTableModel model;
     private ArrayList<Item> items;
-    //private Cart cart;
-    private WishList wl;
+
 
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
     ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
@@ -39,9 +38,6 @@ public class Catalog extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
 
-
-        //cart = new Cart();
-        wl = new WishList();
         items = new ArrayList<>();
 
         ArrayList result = query("catalog", "");
@@ -140,7 +136,7 @@ public class Catalog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                WishlistPage myWishList = new WishlistPage(null, wl.getItems(), Catalog.this);
+                WishlistPage myWishList = new WishlistPage(null, WishList.getItems(), Catalog.this);
             }
         });
         button.add(wishlist);
@@ -187,7 +183,7 @@ public class Catalog extends JDialog {
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     Item item = items.get(row);
-                    wl.addItem(item);
+                    WishList.addItem(item);
                     JOptionPane.showMessageDialog(catalogPanel, item.getName() + " added to wishlist.");
                 } else {
                     JOptionPane.showMessageDialog(catalogPanel, "Please select an item that is available.");

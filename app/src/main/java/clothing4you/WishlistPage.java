@@ -11,8 +11,7 @@ public class WishlistPage extends JDialog {
     private final ArrayList<Item> items;
     private final JTable table;
     private final DefaultTableModel model;
-    private final WishList wishList; //
-    //private final Cart cart;
+
     private final Catalog previousCatalog;
 
 
@@ -28,8 +27,6 @@ public class WishlistPage extends JDialog {
 
         this.previousCatalog = previousCatalog;
         this.items = items;
-        //cart = new Cart();
-        wishList = new WishList();//
 
         model = new DefaultTableModel(new Object[]{"Name", "Price", "Category"}, 0);
         table = new JTable(model);
@@ -43,6 +40,7 @@ public class WishlistPage extends JDialog {
         wishlistPanel.add(button, BorderLayout.SOUTH);
 
         setVisible(true);
+
     }
 
     // Overloaded constructor
@@ -66,6 +64,10 @@ public class WishlistPage extends JDialog {
         // Create and add add-to-cart button
         JButton addToCartButton = createAddToCartButton();
         buttonPanel.add(addToCartButton);
+
+        // Create and add remove button
+        JButton removeButton = createRemoveButton();
+        buttonPanel.add(removeButton);
 
         // Create and add checkout button
         JButton checkoutButton = createCheckoutButton();
@@ -91,11 +93,31 @@ public class WishlistPage extends JDialog {
                 Item item = items.get(row);
                 Cart.addItem(item);
                 JOptionPane.showMessageDialog(wishlistPanel, item.getName() + " added to cart.");
+                WishList.removeItem(item);
+                model.removeRow(row);
+                table.setModel(model);
             } else {
                 JOptionPane.showMessageDialog(wishlistPanel, "Please select an item that is available.");
             }
         });
         return addToCartButton;
+    }
+
+    private JButton createRemoveButton() {
+        JButton removeButton = new JButton("Remove");
+        removeButton.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row != -1) {
+                Item item = items.get(row);
+                WishList.removeItem(item);
+                JOptionPane.showMessageDialog(wishlistPanel, item.getName() + " removed from the wish list.");
+                model.removeRow(row);
+                table.setModel(model);
+            } else {
+                JOptionPane.showMessageDialog(wishlistPanel, "Please select an item that is available.");
+            }
+        });
+        return removeButton;
     }
 
     private JButton createCheckoutButton() {
