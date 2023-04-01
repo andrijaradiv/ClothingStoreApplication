@@ -140,7 +140,7 @@ public class Reviews extends JDialog {
                 String review = reviewTextArea.getText();
 
                 if (name.isEmpty() || review.isEmpty()) {
-                    JOptionPane.showMessageDialog(null,
+                    JOptionPane.showMessageDialog(Reviews.this,
                             "Please enter all fields",
                             "Try again",
                             JOptionPane.ERROR_MESSAGE);
