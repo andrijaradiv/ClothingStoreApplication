@@ -66,4 +66,7 @@ public class Item {
         return image;
     }
 
+    public int getId() {
+        return 0;
+    }
 }
