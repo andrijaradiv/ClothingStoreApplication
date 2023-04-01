@@ -19,9 +19,16 @@ public class App {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
+
+        JDBC.establishConnection();
+
         createTable("users", createUserTable);
         createTable("catalog", createCatalogTable);
 
         Login myLogin = new Login(null);
+
+        // TODO: Make sure closeConnection run only at the end of the program
+        // ^ Low priority so may remain a lingering issue
+        // JDBC.closeConnection();
     }
 }

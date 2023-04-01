@@ -1,6 +1,7 @@
 package clothing4you;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class UserManagerTest {
 
     @Test
     public void testEstablishConnection() throws SQLException, ClassNotFoundException {
-        assertNotNull(JDBC.establishConnection());
+        assertNotNull(JDBC.getConnection());
     }
 
     @Test
@@ -37,36 +38,28 @@ public class UserManagerTest {
 
     @Test
     public void testInsertUser() throws SQLException, ClassNotFoundException {
-        Connection conn = JDBC.establishConnection();
-        JDBC.insertUser(conn, "Test", "test@example.com", "testuser", "testpassword");
-        conn.close();
+        JDBC.insertUser("Test", "test@example.com", "testuser", "testpassword");
         ArrayList<String> result = JDBC.query("users", "first_name");
         assertTrue(result.contains("Test"));
     }
 
     @Test
     public void testInsertItem() throws SQLException, ClassNotFoundException {
-        Connection conn = JDBC.establishConnection();
-        JDBC.insertItem(conn, "T-shirt", "Tops", "M", 1, 20.00);
-        conn.close();
+        JDBC.insertItem("T-shirt", "Tops", "M", 1, 20.00);
         ArrayList<String> result = JDBC.query("catalog", "name");
         assertTrue(result.contains("T-shirt"));
     }
 
     @Test
     public void testQuery() throws SQLException, ClassNotFoundException {
-        Connection conn = JDBC.establishConnection();
-        JDBC.insertUser(conn, "Test", "test@example.com", "testuser", "testpassword");
-        conn.close();
+        JDBC.insertUser("Test", "test@example.com", "testuser", "testpassword");
         ArrayList<String> result = JDBC.query("users", "first_name");
         assertTrue(result.contains("Test"));
     }
 
     @Test
     public void testExists() throws SQLException, ClassNotFoundException {
-        Connection conn = JDBC.establishConnection();
-        JDBC.insertUser(conn, "Test", "test@example.com", "testuser", "testpassword");
-        conn.close();
+        JDBC.insertUser("Test", "test@example.com", "testuser", "testpassword");
         assertTrue(JDBC.exists("testuser", "users", "username"));
         assertFalse(JDBC.exists("testuser2", "users", "username"));
     }

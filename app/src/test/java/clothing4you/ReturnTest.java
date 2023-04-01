@@ -51,12 +51,12 @@ public class ReturnTest {
     @Test
     public void testItemExist() throws SQLException, ClassNotFoundException {
         // Test that the itemExist method returns true when the item exists in the catalog
-        assertTrue(testReturn.exists("Shirt", "catalog", "name"));
+        assertTrue(JDBC.exists("Shirt", "catalog", "name"));
     }
 
     @Test
     public void testItemDoesNotExist() throws SQLException, ClassNotFoundException {
         // Test that the itemExist method returns false when the item does not exist in the catalog
-        assertFalse(testReturn.exists("Invalid Item", "catalog", "name"));
+        assertFalse(JDBC.exists("Invalid Item", "catalog", "name"));
     }
 }
