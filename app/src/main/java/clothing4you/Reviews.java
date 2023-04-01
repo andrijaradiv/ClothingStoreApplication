@@ -1,5 +1,7 @@
 package clothing4you;
 
+import com.google.protobuf.NullValue;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -128,6 +130,32 @@ public class Reviews extends JDialog {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.insets = new Insets(10, 10, 10, 10);
         formPanel.add(submitButton, gbc);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Code to handle the submit button click
+                String name = nameField.getText();
+                int rating = (Integer) ratingComboBox.getSelectedItem();
+                String review = reviewTextArea.getText();
+
+                if (name.isEmpty() || review.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Please enter all fields",
+                            "Try again",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    // Insert review in the database and update the review panel
+                    JOptionPane.showMessageDialog(reviewPanel, "Review submitted!");
+                }
+
+                // Reset the form fields
+                nameField.setText("");
+                ratingComboBox.setSelectedIndex(0);
+                reviewTextArea.setText("");
+            }
+        });
 
         // Add form panel to the dialog
         gbc.gridy++;
