@@ -61,7 +61,7 @@
         <properties>
           <font name="Times New Roman" size="16" style="1"/>
           <labelFor value="1627f"/>
-          <text value="Billing Address"/>
+          <text value="Billing/Shipping Address"/>
         </properties>
       </component>
       <component id="1627f" class="javax.swing.JTextField" binding="tfAddress">
