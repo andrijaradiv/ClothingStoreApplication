@@ -71,7 +71,7 @@ public class GetNotifications extends JDialog {
         formPanel.add(emailField, gbc);
 
         // Send notification Button
-        sendButton = new JButton("Send Notifications");
+        JButton sendButton = new JButton("Send Notifications");
         gbc.gridy++;
         gbc.gridx = 0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -85,7 +85,7 @@ public class GetNotifications extends JDialog {
                 String emailAdd = emailField.getText();
 
                 if (emailAdd.isEmpty()) {
-                    JOptionPane.showMessageDialog(Reviews.this,
+                    JOptionPane.showMessageDialog(new Reviews(null),
                             "Please enter a valid email address",
                             "Try again",
                             JOptionPane.ERROR_MESSAGE);
