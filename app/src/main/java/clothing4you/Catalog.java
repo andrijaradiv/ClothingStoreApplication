@@ -194,8 +194,24 @@ public class Catalog extends JDialog {
         });
         buttonOne.add(addToWishlist);
         catalogPanel.add(buttonOne, BorderLayout.EAST);
-        
-        
+
+        // Get notified button
+        JButton getNotified = new JButton("Get Notified");
+        getNotified.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                if (row != -1) {
+                    // Add get notofication logic
+                    dispose();
+                    GetNotifications getNotifications = new GetNotifications(null);
+                } else {
+                    JOptionPane.showMessageDialog(catalogPanel, "Please select an item to get notified about.");
+                }
+            }
+        });
+        buttonOne.add(getNotified);
+        catalogPanel.add(buttonOne, BorderLayout.EAST);
 
         // Review button
         JButton reviewButton = new JButton("Product Reviews");
