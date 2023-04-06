@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
+// This class represents the Checkout window that allows the user to input their payment details and submit their order.
 public class Checkout extends JDialog {
     private JTextField tfCardName;
     private JTextField tfCardNum;
@@ -25,6 +26,7 @@ public class Checkout extends JDialog {
     private JLabel totalLabel;
     private OrderSummary previousSummary;
 
+    // Visa, Amex, and Paypal icons
     ImageIcon icon1 = new ImageIcon("img/visaNew.png");
     ImageIcon icon2 = new ImageIcon("img/amex.png");
     ImageIcon icon3 = new ImageIcon("img/paypal.png");
@@ -42,6 +44,8 @@ public class Checkout extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         this.previousSummary = previousSummary;
+        
+        // Set icons for payment types
         iconLabel1.setText("");
         iconLabel1.setIcon(icon1);
         iconLabel2.setText("");
@@ -52,7 +56,7 @@ public class Checkout extends JDialog {
         //Cart cart = previousSummary.getCart();
         double cartTotal = Cart.getTotal();
         totalLabel.setText("Total: " + " " + String.format("%.2f",cartTotal));
-
+        // Cancel button: close checkout dialog and return to previous summary
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,6 +93,7 @@ public class Checkout extends JDialog {
         setVisible(true);
     }
 
+    // Method to authorize payment and update database
     private void authorizePayment() throws SQLException, ClassNotFoundException {
         String cardName = tfCardName.getText();
         String cardNum = String.valueOf(tfCardNum.getText());
@@ -97,6 +102,7 @@ public class Checkout extends JDialog {
         String expirationMonth = tfExpirationMonth.getText();
         //String expirationYear =  tfExpirationYear.getText();
 
+        // Validate that all fields are filled out
         if (cardNum.isEmpty() || cardName.isEmpty() || billAddress.isEmpty() || cvc.isEmpty() || expirationMonth.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Please enter all fields",
