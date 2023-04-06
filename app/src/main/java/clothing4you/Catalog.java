@@ -150,6 +150,7 @@ public class Catalog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                History myHistory = new History(null, Catalog.this, new ArrayList<>());
                 // should open the Order history page
             }
         });

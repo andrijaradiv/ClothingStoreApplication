@@ -1,5 +1,7 @@
 package clothing4you;
 
+import com.sun.jdi.JDIPermission;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -9,8 +11,9 @@ import java.util.ArrayList;
 
 public class History extends JDialog {
     private JPanel historyPanel;
+    private JDialog previousDialog;
 
-    public History(JFrame parent, ArrayList<Order> orderList){
+    public History(JFrame parent, JDialog previousDialog, ArrayList<Order> orderList){
         super(parent);
         setTitle("");
         historyPanel = new JPanel(new BorderLayout());
@@ -19,6 +22,7 @@ public class History extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(null);
+        this.previousDialog = previousDialog;
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -34,11 +38,13 @@ public class History extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                previousDialog.setVisible(true);
                 //Go back to the catalog page
             }
         });
         buttonPanel.add(backBtn);
 
+        /*
         JButton returnBtn = new JButton("Return");
         returnBtn.addActionListener(new ActionListener() {
             @Override
@@ -48,6 +54,8 @@ public class History extends JDialog {
             }
         });
         buttonPanel.add(returnBtn);
+
+         */
 
         // Set up the table model
         String[] columnNames = {"Date", "Order Number", "Amount"};
@@ -72,7 +80,7 @@ public class History extends JDialog {
     }
 
     //Just to test the code with order array list
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ArrayList<Order> orderList = new ArrayList<>();
         orderList.add(new Order("2022-01-01", "1001", "$25.00"));
         orderList.add(new Order("2022-01-02", "1002", "$32.50"));
@@ -82,4 +90,6 @@ public class History extends JDialog {
 
         History myHistory = new History(null, orderList);
     }
+
+         */
 }
