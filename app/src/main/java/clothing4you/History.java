@@ -12,10 +12,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+//this is a class that would show the order history a user would have
 public class History extends JDialog {
     private JPanel historyPanel;
     private JDialog previousDialog;
-
+    
+    
     public History(JFrame parent, JDialog previousDialog, ArrayList<Order> orderList){
         super(parent);
         setTitle("");
@@ -30,12 +32,13 @@ public class History extends JDialog {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         JPanel titlePanel = new JPanel(new FlowLayout());
-        JLabel titleLabel = new JLabel("Order History");
+        JLabel titleLabel = new JLabel("Order History"); // Create a new JLabel with the title
         titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 24));
         titlePanel.add(titleLabel);
 
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(); // Create a new JPanel for the buttons
 
+        //back button
         JButton backBtn = new JButton("Back");
         backBtn.addActionListener(new ActionListener() {
             @Override
@@ -60,8 +63,9 @@ public class History extends JDialog {
 
          */
 
-        String[] columnNames = {"Date", "Order Number", "Amount"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+       
+        String[] columnNames = {"Date", "Order Number", "Amount"}; // Create an array of column names
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0) { // Create a new table model with the column names
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
