@@ -14,15 +14,17 @@ import java.util.Objects;
 
 import static clothing4you.JDBC.query;
 
-
+// This is a class called Catalog, which represents a catalog page of a clothing store.
 public class Catalog extends JDialog {
     private JPanel catalogPanel;
+    // It also contains a JComboBox called "cmCategory" which represents a drop-down menu for filtering items by category.
     private JComboBox<String> cmCategory;
+    // There is also a JTable called "table" which displays the items in the catalog in a table format
     private JTable table;
     private DefaultTableModel model;
     private ArrayList<Item> items;
 
-
+    //this was made to test the images using updateTable 
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
     ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
     ImageIcon jeans = new ImageIcon("img/Jeans.png");
@@ -30,6 +32,7 @@ public class Catalog extends JDialog {
     ImageIcon beanie = new ImageIcon("img/Beanie.png");
     ImageIcon hat = new ImageIcon("img/Hat.png");
 
+    
     public Catalog(JFrame parent) throws SQLException, ClassNotFoundException {
         super(parent);
         setTitle("Catalog");
@@ -42,12 +45,14 @@ public class Catalog extends JDialog {
 
         items = new ArrayList<>();
 
+        //this takes the catalog table from the datbase
         ArrayList result = query("catalog", "");
         for (int i = 0; i < result.size(); i++) {
             String[] splited = result.get(i).toString().split(" ");
             items.add(new Item(splited[0], splited[1], splited[2], Integer.parseInt(splited[3]), Double.parseDouble(splited[4]), null));
         }
 
+        //sets up the JTable with the appropriate column headers and the JScrollPane for scrolling through the table.
         model = new DefaultTableModel();
         model.addColumn("Name");
         model.addColumn("Size");
@@ -66,6 +71,7 @@ public class Catalog extends JDialog {
 
         JPanel filter = new JPanel();
 
+        //this is creation of the search button to be able to search items using the preformSearch() method
         JTextField searchField = new JTextField(10);
         filter.add(searchField);
 
@@ -79,6 +85,7 @@ public class Catalog extends JDialog {
         });
         filter.add(search);
 
+        //set up the filtering JComboBox
         cmCategory = new JComboBox<String>();
         cmCategory.addItem("All");
         cmCategory.addItem("Tops");
@@ -238,6 +245,7 @@ public class Catalog extends JDialog {
 
     }
 
+    //The updateTable() method updates the JTable based on the currently selected category in the "cmCategory" JComboBox.
     private void updateTable() {
         model.setRowCount(0);
         String selectedCategory = (String) cmCategory.getSelectedItem();
@@ -246,6 +254,7 @@ public class Catalog extends JDialog {
                 model.addRow(new Object[]{item.getName(), item.getSize(), "$" + String.format("%.2f", item.getPrice()), item.getImage()});
             }
 
+        //this dispalys the images in the table, doesnt work with databse 
         table.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = new JLabel();
@@ -260,7 +269,7 @@ public class Catalog extends JDialog {
         });
     }
 
-
+    // The performSearch() method performs a search for items in the JTable based on the input search string.
     private void performSearch(String search) {
         model.setRowCount(0);
         for (Item item : items) {
