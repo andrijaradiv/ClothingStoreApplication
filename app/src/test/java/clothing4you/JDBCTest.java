@@ -1,10 +1,9 @@
 package clothing4you;
 
+import clothing4you.backend.JDBC;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

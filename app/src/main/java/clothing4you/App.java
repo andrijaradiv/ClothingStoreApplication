@@ -1,14 +1,14 @@
 package clothing4you;
 
+import clothing4you.backend.JDBC;
+import clothing4you.ui.Login;
 import com.formdev.flatlaf.FlatDarculaLaf;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static clothing4you.JDBC.createTable;
-import static clothing4you.JDBC.*;
+import static clothing4you.backend.JDBC.createTable;
+import static clothing4you.backend.JDBC.*;
 
 
 public class App {

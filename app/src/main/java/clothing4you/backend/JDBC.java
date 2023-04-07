@@ -1,4 +1,4 @@
-package clothing4you;
+package clothing4you.backend;
 
 import java.sql.*;
 import java.util.ArrayList;

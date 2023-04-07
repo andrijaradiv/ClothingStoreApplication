@@ -1,4 +1,7 @@
-package clothing4you;
+package clothing4you.ui;
+
+import clothing4you.backend.Cart;
+import clothing4you.backend.Item;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

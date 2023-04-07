@@ -1,4 +1,4 @@
-package clothing4you;
+package clothing4you.ui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

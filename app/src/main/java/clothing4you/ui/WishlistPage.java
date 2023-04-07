@@ -1,4 +1,10 @@
-package clothing4you;
+package clothing4you.ui;
+
+import clothing4you.backend.Cart;
+import clothing4you.backend.Item;
+import clothing4you.backend.WishList;
+import clothing4you.ui.Catalog;
+import clothing4you.ui.OrderSummary;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

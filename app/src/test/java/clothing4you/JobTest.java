@@ -3,22 +3,14 @@ package clothing4you;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Container;
-import java.awt.Frame;
-import java.awt.Window;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
 
-import clothing4you.Job;
+import clothing4you.ui.Job;
 import org.junit.jupiter.api.Test;
 
 public class JobTest {

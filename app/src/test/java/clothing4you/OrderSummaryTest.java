@@ -1,10 +1,11 @@
 package clothing4you;
 
-import org.junit.jupiter.api.BeforeEach;
+import clothing4you.backend.Cart;
+import clothing4you.backend.Item;
+import clothing4you.ui.Catalog;
+import clothing4you.ui.OrderSummary;
+import clothing4you.ui.WishlistPage;
 import org.junit.jupiter.api.Test;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

@@ -1,5 +1,7 @@
 package clothing4you;
 
+import clothing4you.backend.Item;
+import clothing4you.backend.WishList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

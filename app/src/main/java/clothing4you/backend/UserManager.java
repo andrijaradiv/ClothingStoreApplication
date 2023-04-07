@@ -1,9 +1,9 @@
-package clothing4you;
+package clothing4you.backend;
+
+import clothing4you.backend.JDBC;
 
 import javax.swing.*;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 // This class provides methods for registering and logging in users
 public class UserManager {
@@ -27,9 +27,12 @@ public class UserManager {
     public static boolean login(String username, String password, String table){
         try {
             if(JDBC.exists(username, table, "username")){
-                if(JDBC.exists(password.toString(), table, "password")){
+                if(JDBC.exists(password, table, "password")){
                     ArrayList name = (ArrayList) JDBC.customQuery("select first_name from " + table + " where username==\"" + username + "\";");
                     JOptionPane.showMessageDialog(null, "Welcome " + name.get(0));
+                    return true;
+                } else{
+                    return false;
                 }
             }
         } catch (SQLException ex) {
@@ -37,7 +40,7 @@ public class UserManager {
         } catch (ClassNotFoundException ex) {
             throw new RuntimeException(ex);
         }
-        return true;
+        return false;
     }
     public static boolean login(String username, String password){
         return login(username, password, "users");

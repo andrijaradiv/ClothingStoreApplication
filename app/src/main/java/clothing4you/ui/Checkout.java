@@ -1,4 +1,4 @@
-package clothing4you;
+package clothing4you.ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
+import clothing4you.backend.Cart;
+import clothing4you.ui.Catalog;
+import clothing4you.ui.OrderSummary;
 
 // This class represents the Checkout window that allows the user to input their payment details and submit their order.
 public class Checkout extends JDialog {
