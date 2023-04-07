@@ -17,7 +17,7 @@ public class Reviews extends JDialog {
     private JComboBox<Integer> ratingComboBox;
     private JTextArea reviewTextArea;
     private JButton submitButton;
-
+    //this is a page were you can leave a review if you would like too 
     public Reviews (JFrame parent) {
         super(parent, "Product Review", true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
