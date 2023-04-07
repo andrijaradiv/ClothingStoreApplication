@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class JDBC {
+    private static Connection conn = null;
     private static String url = "jdbc:sqlite:/clothing4you";
     public static String createUserTable = "CREATE TABLE IF NOT EXISTS users (" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -22,29 +23,34 @@ public class JDBC {
             "price FLOAT(2)" +
             ");";
 
-    public JDBC() throws SQLException, ClassNotFoundException {
+    private JDBC() throws SQLException, ClassNotFoundException {
     }
 
-    static Connection establishConnection() throws SQLException, ClassNotFoundException {
+    public static void establishConnection() throws SQLException, ClassNotFoundException {
         // Establishes connection with sqlite database
-
-        Connection conn = null;
 
         try {
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:database/clothing4you.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:clothing4you.db");
 
         } catch (Exception e) {
             throw e;
         }
+    }
 
+    public static void closeConnection() throws SQLException {
+        // Close the database connection
+        conn.close();
+    }
+
+    public static Connection getConnection(){
+        // Return the connection
         return conn;
     }
 
     public static void createTable(String table, String createTable) throws SQLException, ClassNotFoundException {
         // Creates table in sqlite database with table name input and sql create table statement
 
-        Connection conn = establishConnection();
         Statement stmt = conn.createStatement();
 
         stmt.executeUpdate(createTable);
@@ -54,22 +60,21 @@ public class JDBC {
         if (res.getInt(1) == 0){
         //if(res.get(0).equals("0")){
             if(table.equals("users")){
-                insertUser(conn, "admin", "admin@gmail.com", "admin", "admin");
+                insertUser("admin", "admin@gmail.com", "admin", "admin");
             } else if(table.equals("catalog")){
-                insertItem(conn, "T-shirt", "Tops", "M", 1, 20.00);
-                insertItem(conn, "Hoodie", "Tops", "M", 1, 25.00);
-                insertItem(conn, "Jeans", "Bottoms", "M", 1, 20.00);
-                insertItem(conn, "Shorts", "Bottoms", "M", 1, 25.00);
-                insertItem(conn, "Beanie", "Hats", "M", 1, 7.50);
-                insertItem(conn, "Hat", "Hats", "M", 1, 7.50);
+                insertItem("T-shirt", "Tops", "M", 1, 20.00);
+                insertItem("Hoodie", "Tops", "M", 1, 25.00);
+                insertItem("Jeans", "Bottoms", "M", 1, 20.00);
+                insertItem("Shorts", "Bottoms", "M", 1, 25.00);
+                insertItem("Beanie", "Hats", "M", 1, 7.50);
+                insertItem("Hat", "Hats", "M", 1, 7.50);
             }
         }
         stmt.close();
-        conn.close();
         System.out.println("Table created successfully");
     }
 
-   public static void insertUser(Connection conn, String first_name, String email,String username, String password, String table) throws SQLException, ClassNotFoundException {
+   public static void insertUser(String first_name, String email,String username, String password, String table) throws SQLException, ClassNotFoundException {
         // Inserts user into user table to allow for data query
 
         conn.setAutoCommit(false);
@@ -81,10 +86,10 @@ public class JDBC {
         conn.commit();
         conn.setAutoCommit(true);
    }
-    public static void insertUser(Connection conn, String first_name, String email,String username, String password) throws SQLException, ClassNotFoundException {
-        insertUser(conn, first_name, email, username, password, "users");
+    public static void insertUser(String first_name, String email,String username, String password) throws SQLException, ClassNotFoundException {
+        insertUser(first_name, email, username, password, "users");
     }
-    public static void insertItem(Connection conn, String name, String category, String size, int quantity, double price) throws SQLException, ClassNotFoundException {
+    public static void insertItem(String name, String category, String size, int quantity, double price) throws SQLException, ClassNotFoundException {
         // Inserts user into user table to allow for data query
 
         conn.setAutoCommit(false);
@@ -102,7 +107,6 @@ public class JDBC {
         // Queries given table and returns array with data in column_name
         ArrayList result = new ArrayList<>();
 
-        Connection conn = establishConnection();
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * from " + table);
 
@@ -125,7 +129,6 @@ public class JDBC {
             //System.out.println(resultSet.getString("email"));
         }
         statement.close();
-        conn.close();
         return result;
     }
 
@@ -138,13 +141,21 @@ public class JDBC {
                 "WHERE EXISTS " +
                 "(SELECT " + column + " FROM " + table + " WHERE " + column + " = '" + data + "');";
 
-        Connection conn = establishConnection();
         Statement stmt = conn.createStatement();
         ResultSet res = stmt.executeQuery(sqlSearch);
         exists = res.next();
         stmt.close();
-        conn.close();
         return exists;
+    }
+
+    public static ResultSet customQuery(String query) throws SQLException, ClassNotFoundException {
+        // Returns the result of a SQL query for a custom query. Used for queries that are one time use
+        // Used mostly for test cases
+
+        Statement stmt = conn.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        stmt.close();
+        return res;
     }
 
     // For reference

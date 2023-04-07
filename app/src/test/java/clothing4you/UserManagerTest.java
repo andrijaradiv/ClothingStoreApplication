@@ -12,16 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserManagerTest {
 
-    private Connection conn;
 
     @BeforeEach
     void setUp() throws SQLException, ClassNotFoundException {
-        conn = JDBC.establishConnection();
+        JDBC.establishConnection();
     }
 
     @AfterEach
     void tearDown() throws SQLException {
-        conn.close();
+        JDBC.closeConnection();
     }
 
     @Test

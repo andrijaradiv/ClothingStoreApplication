@@ -23,16 +23,14 @@ public class JDBCTest {
 
     @BeforeClass
     public static void setUp() throws SQLException, ClassNotFoundException {
+        JDBC.establishConnection();
         JDBC.createTable("users", JDBC.createUserTable);
         JDBC.createTable("catalog", JDBC.createCatalogTable);
     }
 
     @Test
-    public void testEstablishConnection() throws SQLException, ClassNotFoundException {
-        Connection conn = JDBC.establishConnection();
-        assertNotNull(conn);
-        assertFalse(conn.isClosed());
-        conn.close();
+    public void testConnection() throws SQLException, ClassNotFoundException {
+        assertNotNull(JDBC.getConnection());
     }
 
     @Test
@@ -45,20 +43,16 @@ public class JDBCTest {
 
     @Test
     public void testInsertUser() throws SQLException, ClassNotFoundException {
-        Connection conn = JDBC.establishConnection();
-        JDBC.insertUser(conn, TEST_USER, TEST_EMAIL, TEST_USER, TEST_PASSWORD, "users");
+        JDBC.insertUser(TEST_USER, TEST_EMAIL, TEST_USER, TEST_PASSWORD, "users");
         assertTrue(JDBC.exists(TEST_USER, "users", "username"));
-        conn.close();
     }
 
     @Test
     public void testInsertItem() throws SQLException, ClassNotFoundException {
-        Connection conn = JDBC.establishConnection();
-        JDBC.insertItem(conn, TEST_ITEM_NAME, TEST_ITEM_CATEGORY, TEST_ITEM_SIZE, TEST_ITEM_QUANTITY, TEST_ITEM_PRICE);
+        JDBC.insertItem(TEST_ITEM_NAME, TEST_ITEM_CATEGORY, TEST_ITEM_SIZE, TEST_ITEM_QUANTITY, TEST_ITEM_PRICE);
         ArrayList result = JDBC.query("catalog", "name");
         assertNotNull(result);
         assertTrue(result.contains(TEST_ITEM_NAME + " " + TEST_ITEM_CATEGORY + " " + TEST_ITEM_SIZE + " " + TEST_ITEM_QUANTITY + " " + TEST_ITEM_PRICE));
-        conn.close();
     }
 
     @Test

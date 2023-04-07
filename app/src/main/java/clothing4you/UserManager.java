@@ -12,9 +12,7 @@ public class UserManager {
     //using the JDBC class to communicate with a database, we create users 
     public static void register(String name, String email, String username, String password, String table){
         try {
-            Connection conn = JDBC.establishConnection();
-            JDBC.insertUser(conn, name, email, username, password.toString(), table);
-            conn.close();
+            JDBC.insertUser(name, email, username, password.toString(), table);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         } catch (ClassNotFoundException ex) {
@@ -30,15 +28,10 @@ public class UserManager {
         try {
             if(JDBC.exists(username, table, "username")){
                 if(JDBC.exists(password.toString(), table, "password")){
-                    Connection conn = JDBC.establishConnection();
-                    Statement stmt = conn.createStatement();
-                    ArrayList name = (ArrayList) stmt.executeQuery("select first_name from " + table + " where username==\"" + username + "\";");
+                    ArrayList name = (ArrayList) JDBC.customQuery("select first_name from " + table + " where username==\"" + username + "\";");
                     JOptionPane.showMessageDialog(null, "Welcome " + name.get(0));
-                    stmt.close();
-                    conn.close();
                 }
             }
-            Catalog myCatalog = new Catalog(null);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         } catch (ClassNotFoundException ex) {
