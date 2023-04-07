@@ -21,6 +21,7 @@ public class Login extends JDialog {
 
     ImageIcon icon = new ImageIcon("img/Icon.png");
 
+    //creates the frame for the login page
     public Login(JFrame parent) {
         super(parent);
         setTitle("Login");
@@ -33,6 +34,7 @@ public class Login extends JDialog {
         iconLabel.setText("");
         iconLabel.setIcon(icon);
 
+        //login button and its actions
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,6 +51,8 @@ public class Login extends JDialog {
                 }
             }
         });
+        
+        //register button and its actions
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +60,8 @@ public class Login extends JDialog {
                 Register myRegister = new Register(null);
             }
         });
+        
+        //gives you the option to login as a guest if you dont want to login
         btnGuest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,6 +75,8 @@ public class Login extends JDialog {
                 }
             }
         });
+        
+        //opens the job page where you can apply to jobs 
         btnJob.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
