@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Arrays;
-
+//this is a frame that contains the regsitration page 
 public class Register extends JDialog {
 
     private JPanel registerPanel;
@@ -26,6 +26,8 @@ public class Register extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(parent);
+        
+        //register button that takes all your inforamtion and stores everything in the database as well as creating an account you can use to login 
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -34,7 +36,7 @@ public class Register extends JDialog {
                 String email = tfEmail.getText();
                 char[] password = pfPassword.getPassword();
                 char[] confirmPassword = pfConfirmPass.getPassword();
-
+                //if the password doesnt match a message pops up that your password does not match
                 if (Arrays.equals(password, confirmPassword)) {
                     UserManager.register(name, email, username, password.toString());
                     dispose();
@@ -45,6 +47,7 @@ public class Register extends JDialog {
 
             }
         });
+        //back button
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
