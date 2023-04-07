@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import static clothing4you.JDBC.exists;
 import static clothing4you.JDBC.query;
 
+//this is the return page were you could start returning your order 
 public class Return extends JDialog{
     private JPanel returnPanel;
     private JSpinner quantitySpinner;
@@ -33,7 +34,7 @@ public class Return extends JDialog{
      //   cart = new Cart();
 
         quantitySpinner.setModel(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
-
+        //submit your return button
         submitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,7 +47,7 @@ public class Return extends JDialog{
                 }
             }
         });
-
+        //cancel your return and go back to the catalog page 
         cancelBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,7 +64,7 @@ public class Return extends JDialog{
 
         setVisible(true);
     }
-
+    //this message pops up when the return was successful and gives you 50% your next order 
     public void successfulReturn() throws SQLException, ClassNotFoundException {
         String itemName = nameTF.getText();
         int quantity = (int) quantitySpinner.getValue();
