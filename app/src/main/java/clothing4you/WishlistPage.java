@@ -5,7 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+//this is a page that contains the items a user added to its wishlist
 public class WishlistPage extends JDialog {
     private final JPanel wishlistPanel;
     private final ArrayList<Item> items;
@@ -47,7 +47,7 @@ public class WishlistPage extends JDialog {
     public WishlistPage(JFrame parent, ArrayList<Item> items) throws SQLException, ClassNotFoundException {
         this(parent, items, new Catalog(parent));
     }
-
+    //add items to the table 
     private void addItemsToTable() {
         for (Item item : items) {
             model.addRow(new Object[]{item.getName(), item.getPrice(), item.getCategory()});
@@ -84,7 +84,7 @@ public class WishlistPage extends JDialog {
         });
         return backButton;
     }
-
+    //add to cart an item and removes iut from the wishlist
     private JButton createAddToCartButton() {
         JButton addToCartButton = new JButton("Add to Cart");
         addToCartButton.addActionListener(e -> {
@@ -102,7 +102,7 @@ public class WishlistPage extends JDialog {
         });
         return addToCartButton;
     }
-
+    //removes and item from the wishlist if you dont like it anymore  
     private JButton createRemoveButton() {
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(e -> {
@@ -119,7 +119,7 @@ public class WishlistPage extends JDialog {
         });
         return removeButton;
     }
-
+    //if you want to checkout you can jump to checkout after you add your items to the cart 
     private JButton createCheckoutButton() {
         JButton checkoutButton = new JButton("Checkout");
         checkoutButton.addActionListener(e -> {
