@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class JDBC {
-    private static String url = "jdbc:sqlite:/database/clothing4you";
+    private static String url = "jdbc:sqlite:/clothing4you";
     public static String createUserTable = "CREATE TABLE IF NOT EXISTS users (" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "first_name TEXT," +
