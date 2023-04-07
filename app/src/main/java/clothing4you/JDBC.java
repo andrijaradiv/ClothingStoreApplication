@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class JDBC {
-    private static String url = "jdbc:sqlite:/sqlite/clothing4you";
+    private static String url = "jdbc:sqlite:/database/clothing4you";
     public static String createUserTable = "CREATE TABLE IF NOT EXISTS users (" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "first_name TEXT," +
@@ -116,10 +116,10 @@ public class JDBC {
                 result.add(name + " " + category + " " + size + " " + quantity + " " + price);
             }
             else {
-                String first_name = (resultSet.getString("name"));
-                String email = (resultSet.getString("category"));
-                String username = (resultSet.getString("size"));
-                String password = (resultSet.getString("quantity"));
+                String first_name = (resultSet.getString("first_name"));
+                String email = (resultSet.getString("email"));
+                String username = (resultSet.getString("username"));
+                String password = (resultSet.getString("password"));
                 result.add(first_name + " " + email + " " + username + " " + password);
             }
             //System.out.println(resultSet.getString("email"));
