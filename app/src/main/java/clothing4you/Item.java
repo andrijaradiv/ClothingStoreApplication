@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Item {
+    // Private fields for the item's name, category, size, quantity, price, and image
     private String name;
     private String category;
     private String size;
@@ -11,6 +12,7 @@ public class Item {
     private double price;
     private ImageIcon image;
 
+    // Constructor that takes the item's fields as arguments and initializes them
     public Item(String name, String category,String size, int quantity, double price, ImageIcon image) {
         this.name = name;
         this.category = category;
@@ -21,7 +23,7 @@ public class Item {
     }
 
 
-
+    // Getter and setter methods for the item's name, category, size, quantity, price, and image
     public int getQuantity() {
         return quantity;
     }
@@ -66,6 +68,7 @@ public class Item {
         return image;
     }
 
+    // Method that returns the item's ID (currently hardcoded to always return 0)
     public int getId() {
         return 0;
     }
