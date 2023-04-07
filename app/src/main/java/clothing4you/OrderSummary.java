@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+//this is a gui page that will contain the order summary when you want to checkout 
 public class OrderSummary extends JDialog{
     private JPanel orderSummaryPanel;
     private ArrayList<Item> items;
@@ -40,7 +41,9 @@ public class OrderSummary extends JDialog{
         orderSummaryPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         table.setDefaultEditor(Object.class, null);
 
+        //creates a panel fornthe buttons 
         JPanel button = new JPanel();
+        //back button
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
             @Override
@@ -51,7 +54,7 @@ public class OrderSummary extends JDialog{
             }
         });
         button.add(back);
-
+        //checkout button
         JButton checkout = new JButton("CheckOut");
         checkout.addActionListener(new ActionListener() {
             @Override
@@ -61,7 +64,7 @@ public class OrderSummary extends JDialog{
             }
         });
         button.add(checkout);
-
+        //remove button
         JButton remove = new JButton("Remove Item");
         remove.addActionListener(new ActionListener() {
             @Override
@@ -90,7 +93,8 @@ public class OrderSummary extends JDialog{
         // implementation
         this(parent, /*items,*/ new Catalog(parent));
     }
-
+    
+    //this is how the order summary would be displayed 
     private void createTotalRows(){
         Cart.getItems().forEach(item -> {
             model.addRow(new Object[]{item.getName(), "$" + String.format("%.2f", item.getPrice())});
