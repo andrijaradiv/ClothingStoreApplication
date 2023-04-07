@@ -1,6 +1,6 @@
-package clothing4you;
+package clothing4you.ui;
 
-import com.sun.jdi.JDIPermission;
+import clothing4you.backend.Order;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

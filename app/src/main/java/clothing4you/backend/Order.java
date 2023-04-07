@@ -1,4 +1,4 @@
-package clothing4you;
+package clothing4you.backend;
 //this is the object that contains the info about x order (date it was bought, order number, and amount that was paid)
 public class Order {
     private String date;

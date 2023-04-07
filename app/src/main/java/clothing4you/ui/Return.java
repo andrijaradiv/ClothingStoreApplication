@@ -1,4 +1,7 @@
-package clothing4you;
+package clothing4you.ui;
+
+import clothing4you.backend.Item;
+import clothing4you.ui.Catalog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,8 +10,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static clothing4you.JDBC.exists;
-import static clothing4you.JDBC.query;
+import static clothing4you.backend.JDBC.exists;
+import static clothing4you.backend.JDBC.query;
 
 //this is the return page were you could start returning your order 
 public class Return extends JDialog{

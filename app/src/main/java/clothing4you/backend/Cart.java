@@ -1,11 +1,11 @@
-package clothing4you;
+package clothing4you.backend;
 
 import java.util.ArrayList;
 
 // This is a class called Cart, which represents a shopping cart for a store.
 public class Cart {
     // It contains a static ArrayList of Item objects called "items", which represents the items currently in the cart.
-    private static final ArrayList<Item> items = new ArrayList<>(); 
+    private static final ArrayList<Item> items = new ArrayList<>();
     private static final double tax = 0.13;
     private static double totalPrice;
 

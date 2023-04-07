@@ -1,10 +1,10 @@
 package clothing4you;
 
+import clothing4you.backend.JDBC;
+import clothing4you.backend.UserManager;
 import org.junit.Test;
 
-import javax.swing.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 

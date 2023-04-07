@@ -1,6 +1,9 @@
 package clothing4you;
 
 import static org.junit.Assert.*;
+
+import clothing4you.backend.Cart;
+import clothing4you.backend.Item;
 import org.junit.Test;
 
 public class CartTest {

@@ -1,5 +1,6 @@
 package clothing4you;
 
+import clothing4you.backend.Item;
 import org.junit.jupiter.api.Test;
 import javax.swing.ImageIcon;
 import static org.junit.jupiter.api.Assertions.*;

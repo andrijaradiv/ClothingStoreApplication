@@ -1,6 +1,4 @@
-package clothing4you;
-
-import com.google.protobuf.NullValue;
+package clothing4you.ui;
 
 import javax.swing.*;
 import java.awt.*;

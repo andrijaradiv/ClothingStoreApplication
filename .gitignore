@@ -19,3 +19,6 @@ out
 
 # Ignore .txt files for testing. If .txt needed, remove
 *.txt
+
+META-INF/
+app/src/test/META-INF/

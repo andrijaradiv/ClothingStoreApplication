@@ -1,5 +1,6 @@
 package clothing4you;
 
+import clothing4you.backend.Order;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

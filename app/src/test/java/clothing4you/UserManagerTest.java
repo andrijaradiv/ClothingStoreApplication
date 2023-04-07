@@ -1,27 +1,26 @@
 package clothing4you;
 
+import clothing4you.backend.JDBC;
+import clothing4you.backend.UserManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserManagerTest {
 
-    private Connection conn;
 
     @BeforeEach
     void setUp() throws SQLException, ClassNotFoundException {
-        conn = JDBC.establishConnection();
+        JDBC.establishConnection();
     }
 
     @AfterEach
     void tearDown() throws SQLException {
-        conn.close();
+        JDBC.closeConnection();
     }
 
     @Test

@@ -1,5 +1,7 @@
-package clothing4you;
+package clothing4you.ui;
 
+
+import clothing4you.backend.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,6 +45,7 @@ public class Login extends JDialog {
                 // dispose();
                 try {
                     UserManager.login(username, password.toString());
+                    dispose();
                     Catalog myCatalog = new Catalog(null);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);

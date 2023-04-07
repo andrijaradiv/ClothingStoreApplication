@@ -1,4 +1,7 @@
-package clothing4you;
+package clothing4you.backend;
+
+import clothing4you.backend.Cart;
+import clothing4you.backend.Item;
 
 import java.util.ArrayList;
 //this is an object that would store your wishlist items 

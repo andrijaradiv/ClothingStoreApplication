@@ -8,3 +8,5 @@ To run the application, run App.java file or execute the .jar.
 On application being opened, if they do not already exist, the database local file is created, the tables for users and product catalog are created and lightly prepopulated with basic data. This is done so that there will always be at least one account with which the client can log in with and so that the product catalog has some default items. Currently, no further items can be added to product catalog however in the next iteration, admin accounts will be able to add products through the UI to the database which the product catalog loads from.
 
 We do not have a dependency injection as we did not have an original "stub" to work off of. 
+
+To get the required libraries, run build.gradle. If this does not work, the libraries used can be found in said file.

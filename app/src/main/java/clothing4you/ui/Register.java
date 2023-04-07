@@ -1,10 +1,12 @@
-package clothing4you;
+package clothing4you.ui;
+
+import clothing4you.backend.UserManager;
+import clothing4you.ui.Login;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.Arrays;
 //this is a frame that contains the regsitration page 
 public class Register extends JDialog {
