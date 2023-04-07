@@ -1,0 +1,70 @@
+2023/3/22
+
+A short meeting was had to discuss work distribution. Tasks were written down as a combination of feedback from the TA, feedback from the QA team, previous big stories that were put down for itr3 and previous pending issues. Work was allocated based on individuals previous work and experience with considerations for flexibility.
+
+The email opt-in big user story previously advertised was deemed to be changed to simply be an in-app notification since we believe that looking into and implementating email notifications to be too big a task for this iteration. Similarly, while we had working images in the product catalogue for iteration 1, we will be removing them from itr 3 to give more time to ensuring we can complete a stable program.
+
+The task distribution decided is as follows:
+
+Stubbed version of database																	- Andre
+WishlistPage class needs to simplified														- Neha
+Comments on all classes																		- Andre
+Inheritance needs to be used																- Andre
+Separate everything into different packages (refactor of directories)						- Gabriel R
+WRITE TESTS																					- Everyone
+	This means separate backend logic from UI classes and write test cases for them
+Implement product notifications (missing from client team)									- Bhargav
+Need more meeting logs																		- Gabriel R
+Missing Libraries 																			- Gabriel R
+Fix previous issues ?
+Rework database																				- Gabriel R
+
+Issue #15																					- Gabriel R
+Issue #16 Extra Code																		- Neha
+	getTotal calls getSubTotal and adds tax on top
+Issue #17																					- Andre
+Issue #18 More test cases, this is on everyone												- Everyone
+Issue #19 Update UML class diagram															- Bhargav
+
+Product Reviews																				- Neha
+Order History																				- Gabriel K
+Product notifications																		- Bhargav
+Job Availability																			- Gabriel K
+
+Finish up WishlistPage																		- Neha
+Login should persistent																		- Andre
+DB should not be accessed constantly														- Gabriel R
+
+2023/04/03
+
+A Meeting was had to work on the Presentation as a team and discuss how we will present as well as revising our progress with the iteration 3 plan.
+
+All members shared the work they had done and revised what can be done by Friday. Below is the updated list with light work reallocation and status. A large portion of the test cases were written however still need to be cleaned up, particularly where code refactors affected method calls. Overall, work is on track and most of the remaining work lies in merging the varying branches.
+
+Stubbed version of database            														- Andre                Incomplete
+WishlistPage class needs to simplified        												- Neha                Done
+Comments on all classes                														- Andre                Done
+Inheritance needs to be used            													- Everyone            Incomplete
+Separate everything into different packages (refactor of directories)        				- Gabriel R            Done on thursday
+WRITE TESTS                            														- Everyone            Needs to be fixed
+    This means separate backend logic from UI classes and write test cases for them
+Implement product notifications (missing from client team)    								- Bhargav            Missing
+Need more meeting logs                														- Gabriel R            In progress
+Missing Libraries                 															- Gabriel R            Done on thursday
+Rework database                    															- Gabriel R            Done
+
+Issue #15                    																- Gabriel R            Incomplete
+Issue #16 Extra Code         														       	- Neha                Believed to be done
+    getTotal calls getSubTotal and adds tax on top
+Issue #17                    																- Andre                Potentially close without resolution, needs discussion
+Issue #18 More test cases, this is on everyone            									- Everyone            Needs to be fixed
+Issue #19 Update UML class diagram        													- Bhargav            Missing
+
+Product Reviews                    															- Neha                Done
+Order History                   															- Gabriel K            Done
+Product notifications                														- Bhargav            Missing
+Job Availability                															- Gabriel K            Done
+
+Finish up WishlistPage                														- Neha                Done 
+Login should persistent                														- Andre                Drop with reason
+DB should not be accessed constantly        												- Gabriel R            Done
