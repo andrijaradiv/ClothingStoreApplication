@@ -1,7 +1,7 @@
 package clothing4you;
 
 import java.util.ArrayList;
-
+//this is an object that would store your wishlist items 
 public class WishList {
 
     private static final ArrayList<Item> wishlistItems = new ArrayList<>();
@@ -9,7 +9,7 @@ public class WishList {
     private WishList() {
 
     }
-
+    //getters and setters for the wishlist object 
     public static void addItem(Item item) {
         wishlistItems.add(item);
     }
