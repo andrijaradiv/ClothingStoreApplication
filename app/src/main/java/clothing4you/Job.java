@@ -20,6 +20,7 @@ public class Job extends JDialog{
         setModal(true);
         setLocationRelativeTo(null);
 
+        // Panel for user input with labels and text fields for name, email, phone, and resume
         JPanel userInputPanel = new JPanel(new GridBagLayout());
         userInputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -76,12 +77,12 @@ public class Job extends JDialog{
 
         jobPanel.add(userInputPanel, BorderLayout.WEST);
 
-
+        // Label for the job openings table
         JLabel titleLabel = new JLabel("Job Openings", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
         jobPanel.add(titleLabel, BorderLayout.NORTH);
 
-
+        // Data for the job openings table
         String[] columnNames = {"Job Title", "Location", "Salary"};
         Object[][] rowData = {
                 {"Sales Associate", "Toronto", "60,000"},
@@ -91,6 +92,8 @@ public class Job extends JDialog{
                 {"Janitor", "Montreal", "40,000"},
                 {"Marketing Manger", "Toronto", "100,000"}
         };
+        
+        // Create the table model and set it to the job openings table
         DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames);
 
 
